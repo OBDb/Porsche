@@ -97,9 +97,9 @@
         }}
     }
   ]},
-{ "hdr": "70E", "rax": "778", "fcm1": true, "dbg": true, "cmd": {"22": "1945"}, "freq": 5,
+{ "hdr": "70E", "rax": "778", "fcm1": true, "dbg": true, "cmd": {"22": "1945"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_HTR_NOZZLE", "path": "Engine", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Washer nozzle heater active"}
+    {"id": "PORSCHE_MQB_HTR_NOZZLE", "path": "Engine", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Washer nozzle heater active"}
   ]},
 { "hdr": "70E", "rax": "778", "fcm1": true, "din": "03", "dbg": true, "cmd": {"22": "2605"}, "freq": 1,
   "signals": [
@@ -190,7 +190,8 @@
   ]},
 { "hdr": "70F", "rax": "779", "fcm1": true, "dbg": true, "cmd": {"22": "13ED"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_CPL_CLU_TQ", "path": "Transmission", "fmt": { "len": 16, "max": 65535, "unit": "percent" }, "name": "Coupling clutch torque"}
+    {"id": "PORSCHE_CPL_CLU_TQ", "path": "Transmission", "fmt": { "len": 16, "max": 65535, "unit": "scalar"  }, "name": "Coupling clutch torque, raw"},
+    {"id": "PORSCHE_CLU_TQ",     "path": "Transmission", "fmt": { "len": 16, "max": 65535, "unit": "percent" }, "name": "Clutch torque %"}
   ]},
 { "hdr": "70F", "rax": "779", "fcm1": true, "dbg": true, "cmd": {"22": "1800"}, "freq": 1,
   "signals": [
@@ -363,9 +364,9 @@
 { "hdr": "710", "rax": "77A", "fcm1": true, "dbg": true, "cmd": {"22": "2A61"}, "freq": 1,
   "signals": [
     {"id": "PORSCHE_SSB_TOTAL_CHARGE",    "path": "Battery", "fmt": {           "len": 32, "max": 100,         "div": 10, "unit": "ampereHours" }, "name": "Start/stop battery total charge"},
-    {"id": "PORSCHE_BAT_TOT_CHG",         "path": "Battery", "fmt": {           "len": 32, "max": 429496729.5, "div": 10, "unit": "ampereHours" }, "name": "Battery total charge"},
+    {"id": "PORSCHE_MQB_BAT_TOT_CHG",     "path": "Battery", "fmt": {           "len": 32, "max": 429496729.5, "div": 10, "unit": "ampereHours" }, "name": "Battery total charge"},
     {"id": "PORSCHE_SSB_TOTAL_DISCHARGE", "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 100,         "div": 10, "unit": "ampereHours" }, "name": "Start/stop battery total discharge"},
-    {"id": "PORSCHE_BAT_TOT_DIS",         "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 429496729.5, "div": 10, "unit": "ampereHours" }, "name": "Battery total discharge"}
+    {"id": "PORSCHE_MQB_BAT_TOT_DIS",     "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 429496729.5, "div": 10, "unit": "ampereHours" }, "name": "Battery total discharge"}
   ]},
 { "hdr": "710", "rax": "77A", "fcm1": true, "dbg": true, "cmd": {"22": "2AB2"}, "freq": 86400,
   "signals": [
@@ -425,21 +426,19 @@
   ]},
 { "hdr": "710", "rax": "77A", "fcm1": true, "dbg": true, "cmd": {"22": "5505"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_STEER_WHL_T", "path": "Tires", "fmt": { "len": 8, "max": 255, "unit": "celsius" }, "name": "Steering wheel temperature"}
+    {"id": "PORSCHE_STEER_WHL_T",             "path": "Tires", "fmt": { "len": 8, "max": 255, "unit": "scalar"  }, "name": "Steering wheel temperature, raw", "description": "Reads 254 on a 2022 and 67-74 on a 2025, which no temperature unit has been shown to fit."},
+    {"id": "PORSCHE_E_TRON_TRON_STEER_WHL_T", "path": "Tires", "fmt": { "len": 8, "max": 255, "unit": "celsius" }, "name": "Steering wheel temperature"}
   ]},
-{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1805"}, "freq": 5,
+{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1805"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_STEER_TQ_1",          "path": "Tires", "fmt": { "len": 16, "max": 144.0709, "min": -143.9553, "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 1"},
-    {"id": "PORSCHE_STEER_WHL_TQ_SENS_1", "path": "Tires", "fmt": { "len": 16, "max": 144,      "min": -143,      "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 1"}
+    {"id": "PORSCHE_STEER_WHL_TQ_SENS_1", "path": "Tires", "fmt": { "len": 16, "max": 144, "min": -143, "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 1"}
   ]},
-{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1806"}, "freq": 5,
+{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1806"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_STEER_TQ_2",          "path": "Tires", "fmt": { "len": 16, "max": 144.0709, "min": -143.9553, "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 2"},
-    {"id": "PORSCHE_STEER_WHL_TQ_SENS_2", "path": "Tires", "fmt": { "len": 16, "max": 144,      "min": -143,      "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 2"}
+    {"id": "PORSCHE_STEER_WHL_TQ_SENS_2", "path": "Tires", "fmt": { "len": 16, "max": 144, "min": -143, "mul": 0.004395, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel torque sensor 2"}
   ]},
-{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1812"}, "freq": 5,
+{ "hdr": "712", "rax": "77C", "fcm1": true, "dbg": true, "cmd": {"22": "1812"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_STEER_ANGLE_EPS",   "path": "Tires", "fmt": { "len": 16, "max": 4095.875, "min": -4096,    "div": 8,              "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"},
     {"id": "PORSCHE_STEER_WHEEL_ANGLE", "path": "Tires", "fmt": { "len": 16, "max": 780,      "min": -750,     "div": 8, "add": -750,               "unit": "degrees" }, "name": "Steering wheel angle"},
     {"id": "PORSCHE_MQB_SWA",           "path": "Tires", "fmt": { "len": 16, "max": 4095.935, "min": -4095.94, "div": 8, "add": 0.06, "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"}
   ]},
@@ -474,84 +473,81 @@
     {"id": "PORSCHE_RR_VSS",        "path": "Movement", "fmt": { "len": 16, "max": 6553.5, "div": 10, "unit": "kilometers"        }, "name": "Rear right wheel speed"},
     {"id": "PORSCHE_RR_VSS_V2_RAW", "path": "Movement", "fmt": { "len": 16, "max": 65535,             "unit": "scalar"            }, "name": "Rear right wheel speed, raw count"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1804"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1804"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_SWA_ALT",     "path": "Tires", "fmt": {"bix": 80, "len": 16, "max": 14335.5625, "min": -14336, "mul": 0.4375, "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"},
-    {"id": "PORSCHE_MQB_SWA_ALT", "path": "Tires", "fmt": {"bix": 80, "len": 16, "max": 14335.562,  "min": -14336, "mul": 0.4375, "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"}
+    {"id": "PORSCHE_STEER_WHEEL_ANGLE_ABS", "path": "Tires", "fmt": {"bix": 80, "len": 16, "max": 14335.5625, "min": -14336, "mul": 0.4375, "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"},
+    {"id": "PORSCHE_MQB_SWA_ALT",           "path": "Tires", "fmt": {"bix": 80, "len": 16, "max": 14335.562,  "min": -14336, "mul": 0.4375, "sign": true, "unit": "degrees" }, "name": "Steering wheel angle"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1808"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1808"}, "freq": 2,
   "signals": [
-    {"id": "PORSCHE_HDC_ACT", "path": "Control", "fmt": {"bix": 6, "len": 1, "max": 1,   "unit": "offon"   }, "name": "Hill descent control active"},
-    {"id": "PORSCHE_HDC_INC", "path": "Control", "fmt": {"bix": 8, "len": 8, "max": 255, "unit": "percent" }, "name": "Hill descent control incline angle"}
+    {"id": "PORSCHE_HDC_ACTIVE",  "path": "Engine", "fmt": {"bix": 6, "len": 1, "max": 1,   "unit": "offon"   }, "name": "Hill descent control"},
+    {"id": "PORSCHE_HDC_INCLINE", "path": "Engine", "fmt": {"bix": 8, "len": 8, "max": 255, "unit": "percent" }, "name": "Hill descent control, incline"}
   ]},
 { "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "180A"}, "freq": 1,
   "signals": [
     {"id": "PORSCHE_MQB_HAL_CLUTCH_OPEN",  "path": "Transmission", "fmt": {"bix": 2,  "len": 1, "max": 1,           "unit": "offon" }, "name": "All-wheel drive clutch fully open"},
     {"id": "PORSCHE_MQB_HAL_CLUTCH_BLOCK", "path": "Transmission", "fmt": {"bix": 15, "len": 1, "max": 1, "mul": 8, "unit": "offon" }, "name": "All-wheel drive clutch blockage degree"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "180C"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "180C"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_ELEC_DIFF_ACT",      "path": "Engine",  "fmt": {"bix": 1,  "len": 1,  "max": 1,                                                   "unit": "offon"   }, "name": "Electronic differential lock active"},
-    {"id": "PORSCHE_ELEC_DIFF_FL_BRK_T", "path": "Engine",  "fmt": {"bix": 8,  "len": 16, "max": 300, "min": -20,             "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock front left brake temperature"},
-    {"id": "PORSCHE_EDL_FR_L_BRAKE_T",   "path": "Control", "fmt": {"bix": 8,  "len": 16, "max": 300, "min": -20, "mul": 0.5,           "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: front left brake temperature"},
-    {"id": "PORSCHE_ELEC_DIFF_FR_BRK_T", "path": "Engine",  "fmt": {"bix": 24, "len": 16, "max": 300, "min": -20,             "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock front right brake temperature"},
-    {"id": "PORSCHE_EDL_FR_R_BRAKE_T",   "path": "Control", "fmt": {"bix": 24, "len": 16, "max": 300, "min": -20, "mul": 0.5,           "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: front right brake temperature"},
-    {"id": "PORSCHE_ELEC_DIFF_RL_BRK_T", "path": "Engine",  "fmt": {"bix": 40, "len": 16, "max": 300, "min": -20,             "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock rear left brake temperature"},
-    {"id": "PORSCHE_EDL_RR_L_BRAKE_T",   "path": "Control", "fmt": {"bix": 40, "len": 16, "max": 300, "min": -20, "mul": 0.5,           "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: rear left brake temperature"},
-    {"id": "PORSCHE_ELEC_DIFF_RR_BRK_T", "path": "Engine",  "fmt": {"bix": 56, "len": 16, "max": 300, "min": -20,             "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock rear right brake temperature"},
-    {"id": "PORSCHE_EDL_RR_R_BRAKE_T",   "path": "Control", "fmt": {"bix": 56, "len": 16, "max": 300, "min": -20, "mul": 0.5,           "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: rear right brake temperature"}
+    {"id": "PORSCHE_EDL_ACTIVE",       "path": "Control", "fmt": {"bix": 1,  "len": 1,  "max": 1,                                       "unit": "offon"   }, "name": "Electronic differential lock: active"},
+    {"id": "PORSCHE_EDL_FR_L_BRAKE_T", "path": "Control", "fmt": {"bix": 8,  "len": 16, "max": 300, "min": -20, "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: front left brake temperature"},
+    {"id": "PORSCHE_EDL_FR_R_BRAKE_T", "path": "Control", "fmt": {"bix": 24, "len": 16, "max": 300, "min": -20, "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: front right brake temperature"},
+    {"id": "PORSCHE_EDL_RR_L_BRAKE_T", "path": "Control", "fmt": {"bix": 40, "len": 16, "max": 300, "min": -20, "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: rear left brake temperature"},
+    {"id": "PORSCHE_EDL_RR_R_BRAKE_T", "path": "Control", "fmt": {"bix": 56, "len": 16, "max": 300, "min": -20, "div": 2, "sign": true, "unit": "celsius" }, "name": "Electronic differential lock: rear right brake temperature"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "180E"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "180E"}, "freq": 2,
   "signals": [
-    {"id": "PORSCHE_BRK_DRY_ACT",      "path": "Brakes", "fmt": {"bix": 1, "len": 1,  "max": 1,      "unit": "offon"      }, "name": "Brake disk drying active"},
-    {"id": "PORSCHE_BRK_DRY_ODO_LAST", "path": "Brakes", "fmt": {"bix": 8, "len": 24, "max": 200000, "unit": "kilometers" }, "name": "Brake disk drying last activation distance"}
+    {"id": "PORSCHE_BDD_ACTIVE", "path": "Control", "fmt": {"bix": 1, "len": 1,  "max": 1,      "unit": "offon"      }, "name": "Brake disk drying"},
+    {"id": "PORSCHE_BDD_ODO",    "path": "Control", "fmt": {"bix": 8, "len": 24, "max": 200000, "unit": "kilometers" }, "name": "Brake disk drying, odometer at last activation"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1810"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1810"}, "freq": 2,
   "signals": [
-    {"id": "PORSCHE_HYD_BRK_BST_ACT", "path": "Engine", "fmt": {"bix": 6, "len": 1, "max": 1, "unit": "offon" }, "name": "Hydraulic brake booster active"}
+    {"id": "PORSCHE_HYD_BRAKE_BOOST_ACTIVE", "path": "Control", "fmt": {"bix": 6, "len": 1, "max": 1, "unit": "offon" }, "name": "Hydraulic brake booster: active"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1816"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1816"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_BRK_PRESS", "path": "Brakes", "fmt": {"bix": 8,  "len": 16, "max": 327.67, "div": 100, "sign": true, "unit": "bars"    }, "name": "Brake pressure"},
-    {"id": "PORSCHE_AIR_VAC",   "path": "Engine", "fmt": {"bix": 56, "len": 16, "max": 32767,              "sign": true, "unit": "unknown" }, "name": "Air intake vacuum"}
+    {"id": "PORSCHE_BRAKE_P_SNS",        "path": "Control", "fmt": {"bix": 8,  "len": 16, "max": 327.67, "div": 100, "sign": true, "unit": "bars"    }, "name": "Brake pressure sensor"},
+    {"id": "PORSCHE_AIR_GAB_VACUUM_SNS", "path": "Control", "fmt": {"bix": 56, "len": 16, "max": 32767,              "sign": true, "unit": "unknown" }, "name": "Air gab vacuum sensor"}
   ]},
 { "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "1821"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_TPMS_AVAIL",                          "path": "Tires", "fmt": {"bix": 7,   "len": 1,  "max": 1,                                 "unit": "offon"      }, "name": "Tire pressure monitoring available"},
     {"id": "PORSCHE_TPMS",                                "path": "Tires", "fmt": {"bix": 7,   "len": 1,  "max": 1,                                 "unit": "noyes"      }, "name": "Tire pressure monitoring system available"},
-    {"id": "PORSCHE_TPMS_ODO_ADAPT_1",                    "path": "Tires", "fmt": {"bix": 8,   "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading at last adaptation"},
+    {"id": "PORSCHE_MQB_TPMS_AVAIL",                      "path": "Tires", "fmt": {"bix": 7,   "len": 1,  "max": 1,                                 "unit": "offon"      }, "name": "Tire pressure monitoring available"},
+    {"id": "PORSCHE_TPMS_ODO_LAST_ADAPTATION",            "path": "Tires", "fmt": {"bix": 8,   "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, last adaptation"},
+    {"id": "PORSCHE_TPMS_AVAIL",                          "path": "Tires", "fmt": {"bix": 15,  "len": 1,  "max": 1,                                 "unit": "noyes"      }, "name": "Tire pressure monitoring available?"},
     {"id": "PORSCHE_TPMS_ODO_RDG_AT_LAST_ADAPT",          "path": "Trips", "fmt": {"bix": 16,  "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading at last adaptation"},
-    {"id": "PORSCHE_TPMS_ODO_ADAPT_2",                    "path": "Tires", "fmt": {"bix": 40,  "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading two adaptations ago"},
+    {"id": "PORSCHE_TPMS_ODO_TWO_ADAPTATIONS_AGO",        "path": "Tires", "fmt": {"bix": 40,  "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, two adaptations ago"},
     {"id": "PORSCHE_TPMS_ODO_RDG_TWO_ADAPTATIONS_AGO",    "path": "Trips", "fmt": {"bix": 48,  "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading two adaptations ago"},
-    {"id": "PORSCHE_TPMS_ODO_ADAPT_3",                    "path": "Tires", "fmt": {"bix": 72,  "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading three adaptations ago"},
+    {"id": "PORSCHE_TPMS_ODO_THREE_ADAPTATIONS_AGO",      "path": "Tires", "fmt": {"bix": 72,  "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, three adaptations ago"},
     {"id": "PORSCHE_TPMS_ODO_RDG_THREE_ADAPTATIONS_AGO",  "path": "Trips", "fmt": {"bix": 80,  "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading three adaptations ago"},
-    {"id": "PORSCHE_TPMS_ODO_ADAPT_4",                    "path": "Tires", "fmt": {"bix": 104, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading four adaptations ago"},
+    {"id": "PORSCHE_TPMS_ODO_FOUR_ADAPTATIONS_AGO",       "path": "Tires", "fmt": {"bix": 104, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, four adaptations ago"},
     {"id": "PORSCHE_TPMS_ODO_RDG_FOUR_ADAPTATIONS_AGO",   "path": "Trips", "fmt": {"bix": 112, "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading four adaptations ago"},
-    {"id": "PORSCHE_TPMS_ODO_WARN_1",                     "path": "Tires", "fmt": {"bix": 136, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading at last warning"},
+    {"id": "PORSCHE_TPMS_ODO_LAST_WARN",                  "path": "Tires", "fmt": {"bix": 136, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, last warning"},
     {"id": "PORSCHE_TPMS_ODO_RDG_AT_LAST_WARN",           "path": "Trips", "fmt": {"bix": 144, "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading at last warning"},
-    {"id": "PORSCHE_TPMS_ODO_WARN_2",                     "path": "Tires", "fmt": {"bix": 168, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading at second to last warning"},
+    {"id": "PORSCHE_TPMS_ODO_NEXT_TO_LAST_WARN",          "path": "Tires", "fmt": {"bix": 168, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, next-to-last warning"},
     {"id": "PORSCHE_TPMS_ODO_RDG_AT_NEXT_TO_LAST_WARN",   "path": "Trips", "fmt": {"bix": 176, "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading at next-to-last warning"},
-    {"id": "PORSCHE_TPMS_ODO_WARN_3",                     "path": "Tires", "fmt": {"bix": 200, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading at third to last warning"},
+    {"id": "PORSCHE_TPMS_ODO_THIRD_TO_LAST_WARN",         "path": "Tires", "fmt": {"bix": 200, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, third-to-last warning"},
     {"id": "PORSCHE_TPMS_ODO_RDG_AT_THIRD_TO_LAST_WARN",  "path": "Trips", "fmt": {"bix": 208, "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading at third-to-last warning"},
-    {"id": "PORSCHE_TPMS_ODO_WARN_4",                     "path": "Tires", "fmt": {"bix": 232, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Tire pressure monitoring odometer reading at fourth to last warning"},
+    {"id": "PORSCHE_TPMS_ODO_FOURTH_TO_LAST_WARN",        "path": "Tires", "fmt": {"bix": 232, "len": 32, "max": 200000,                            "unit": "kilometers" }, "name": "Odometer, fourth-to-last warning"},
     {"id": "PORSCHE_TPMS_ODO_RDG_AT_FOURTH_TO_LAST_WARN", "path": "Trips", "fmt": {"bix": 240, "len": 32, "max": 4294967295, "nullmax": 4294967295, "unit": "kilometers" }, "name": "Odometer reading at fourth-to-last warning"},
-    {"id": "PORSCHE_TPMS_FL_TIRE_LEAK",                   "path": "Tires", "fmt": {"bix": 264, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring front left tire leakage rate"},
-    {"id": "PORSCHE_TPMS_FR_TIRE_LEAK",                   "path": "Tires", "fmt": {"bix": 272, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring front right tire leakage rate"},
-    {"id": "PORSCHE_TPMS_RL_TIRE_LEAK",                   "path": "Tires", "fmt": {"bix": 280, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring rear left tire leakage rate"},
-    {"id": "PORSCHE_TPMS_RR_TIRE_LEAK",                   "path": "Tires", "fmt": {"bix": 288, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring rear right tire leakage rate"},
-    {"id": "PORSCHE_TPMS_FL_FLAT",                        "path": "Tires", "fmt": {"bix": 296, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring front left flat tire indicator"},
-    {"id": "PORSCHE_TPMS_FR_FLAT",                        "path": "Tires", "fmt": {"bix": 304, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring front right flat tire indicator"},
-    {"id": "PORSCHE_TPMS_RL_FLAT",                        "path": "Tires", "fmt": {"bix": 312, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring rear left flat tire indicator"},
-    {"id": "PORSCHE_TPMS_RR_FLAT",                        "path": "Tires", "fmt": {"bix": 320, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Tire pressure monitoring rear right flat tire indicator"},
+    {"id": "PORSCHE_TPMS_FL_TP_DIFFUSION",                "path": "Tires", "fmt": {"bix": 264, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Front left tire pressure diffusion"},
+    {"id": "PORSCHE_TPMS_FR_L_TIRE_P_DIFF_IND",           "path": "Tires", "fmt": {"bix": 272, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Front left tire pressure diffusion indicator"},
+    {"id": "PORSCHE_TPMS_FR_R_TIRE_P_DIFF_IND",           "path": "Tires", "fmt": {"bix": 280, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Front right tire pressure diffusion indicator"},
+    {"id": "PORSCHE_TPMS_RR_L_TIRE_P_DIFF_IND",           "path": "Tires", "fmt": {"bix": 288, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Rear left tire pressure diffusion indicator"},
+    {"id": "PORSCHE_TPMS_RR_R_TIRE_P_DIFF_IND",           "path": "Tires", "fmt": {"bix": 296, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Rear right tire pressure diffusion indicator"},
+    {"id": "PORSCHE_TPMS_FR_L_FLAT_TIRE_IND",             "path": "Tires", "fmt": {"bix": 304, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Front left flat tire indicator"},
+    {"id": "PORSCHE_TPMS_FR_R_FLAT_TIRE_IND",             "path": "Tires", "fmt": {"bix": 312, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Front right flat tire indicator"},
+    {"id": "PORSCHE_TPMS_RR_L_FLAT_TIRE_IND",             "path": "Tires", "fmt": {"bix": 320, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Rear left flat tire indicator"},
     {"id": "PORSCHE_TPMS_RR_R_FLAT_TIRE_IND",             "path": "Tires", "fmt": {"bix": 328, "len": 8,  "max": 255,                               "unit": "scalar"     }, "name": "Rear right flat tire indicator"}
   ]},
-{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "18B6"}, "freq": 5,
+{ "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "18B6"}, "freq": 900,
   "signals": [
-    {"id": "PORSCHE_CSS_ACT",                               "path": "Control", "fmt": {"bix": 6,  "len": 1,  "max": 1,                     "unit": "offon"        }, "name": "Directional stability control active"},
-    {"id": "PORSCHE_CSS_ODO_LAST",                          "path": "Control", "fmt": {"bix": 8,  "len": 24, "max": 1,                     "unit": "kilometers"   }, "name": "Directional stability control last activation distance"},
+    {"id": "PORSCHE_CNT_STEER_SUPPORT_ACTIVE",              "path": "Engine",  "fmt": {"bix": 6,  "len": 1,  "max": 1,                     "unit": "offon"        }, "name": "Counter steer support"},
     {"id": "PORSCHE_CNT_STEER_SUPPORT_ODO_RDG_OF_LAST_ACT", "path": "Trips",   "fmt": {"bix": 8,  "len": 24, "max": 16777215,              "unit": "kilometers"   }, "name": "Counter steer support, odometer, last activated"},
-    {"id": "PORSCHE_CSS_STR_TRQ",                           "path": "Control", "fmt": {"bix": 32, "len": 16, "max": 1,        "div": 1000, "unit": "newtonMeters" }, "name": "Directional stability control steering torque"},
-    {"id": "PORSCHE_CNT_STEER_SUPPORT_STEERING_TRQ",        "path": "Engine",  "fmt": {"bix": 32, "len": 16, "max": 65.535,   "div": 1000, "unit": "newtonMeters" }, "name": "Counter steer support, steering torque"}
+    {"id": "PORSCHE_CSTEER_ODO_LAST_ACTIVATED",             "path": "Control", "fmt": {"bix": 8,  "len": 24, "max": 1,                     "unit": "kilometers"   }, "name": "Counter steer support, odometer"},
+    {"id": "PORSCHE_CNT_STEER_SUPPORT_STEERING_TRQ",        "path": "Engine",  "fmt": {"bix": 32, "len": 16, "max": 65.535,   "div": 1000, "unit": "newtonMeters" }, "name": "Counter steer support, steering torque"},
+    {"id": "PORSCHE_CSTEER_STEERING_TORQUE",                "path": "Control", "fmt": {"bix": 32, "len": 16, "max": 1,        "div": 1000, "unit": "newtonMeters" }, "name": "Counter steer support, steering torque"}
   ]},
 { "hdr": "713", "rax": "77D", "fcm1": true, "dbg": true, "cmd": {"22": "2005"}, "freq": 1,
   "signals": [
@@ -560,12 +556,12 @@
 { "hdr": "713", "rax": "77D", "dbg": true, "cmd": {"22": "2B1B"}, "freq": 0.25,
   "signals": [
     {"id": "PORSCHE_TIRE_FL_SPD_713", "path": "Movement", "fmt": { "len": 16, "max": 1000,           "div": 10,  "unit": "kilometersPerHour" }, "name": "Front left wheel speed"},
-    {"id": "PORSCHE_TIRE_FL_SPD_V2",  "path": "Movement", "fmt": { "len": 16, "max": 1000, "mul": 9, "div": 160, "unit": "kilometersPerHour" }, "name": "Front left wheel speed"}
+    {"id": "PORSCHE_TIRE_FL_SPD_V3",  "path": "Movement", "fmt": { "len": 16, "max": 1000, "mul": 9, "div": 160, "unit": "kilometersPerHour" }, "name": "Front left wheel speed"}
   ]},
 { "hdr": "713", "rax": "77D", "dbg": true, "cmd": {"22": "2B1C"}, "freq": 0.25,
   "signals": [
     {"id": "PORSCHE_TIRE_FR_SPD_713", "path": "Movement", "fmt": { "len": 16, "max": 1000,           "div": 10,  "unit": "kilometersPerHour" }, "name": "Front right wheel speed"},
-    {"id": "PORSCHE_TIRE_FR_SPD_V2",  "path": "Movement", "fmt": { "len": 16, "max": 1000, "mul": 9, "div": 160, "unit": "kilometersPerHour" }, "name": "Front right wheel speed"}
+    {"id": "PORSCHE_TIRE_FR_SPD_V3",  "path": "Movement", "fmt": { "len": 16, "max": 1000, "mul": 9, "div": 160, "unit": "kilometersPerHour" }, "name": "Front right wheel speed"}
   ]},
 { "hdr": "713", "rax": "77D", "dbg": true, "cmd": {"22": "2B1D"}, "freq": 0.25,
   "signals": [
@@ -604,8 +600,8 @@
 { "hdr": "714", "rax": "77E", "dbg": true, "cmd": {"22": "2203"}, "freq": 30,
   "signals": [
     {"id": "PORSCHE_ODO_DASH", "path": "Trips", "fmt": { "len": 24, "max": 255,                 "unit": "kilometers" }, "name": "Odometer, dash", "suggestedMetric": "odometer"},
-    {"id": "PORSCHE_ODO_V3",   "path": "Trips", "fmt": { "len": 24, "max": 16777215,            "unit": "kilometers" }, "name": "Odometer",       "suggestedMetric": "odometer"},
-    {"id": "PORSCHE_PQ35_ODO", "path": "Trips", "fmt": { "len": 16, "max": 655350,   "mul": 10, "unit": "kilometers" }, "name": "Odometer",       "suggestedMetric": "odometer"}
+    {"id": "PORSCHE_PQ35_ODO", "path": "Trips", "fmt": { "len": 16, "max": 655350,   "mul": 10, "unit": "kilometers" }, "name": "Odometer",       "suggestedMetric": "odometer"},
+    {"id": "PORSCHE_ODO_714",  "path": "Trips", "fmt": { "len": 24, "max": 16777215,            "unit": "kilometers" }, "name": "Odometer",       "suggestedMetric": "odometer"}
   ]},
 { "hdr": "714", "rax": "77E", "dbg": true, "cmd": {"22": "2206"}, "freq": 30,
   "signals": [
@@ -643,8 +639,7 @@
   ]},
 { "hdr": "714", "rax": "77E", "fcm1": true, "dbg": true, "cmd": {"22": "22B8"}, "freq": 30,
   "signals": [
-    {"id": "PORSCHE_ODO_MILEAGE_HR",             "path": "Trips", "fmt": { "len": 32, "max": 4294967, "div": 1000, "unit": "kilometers" }, "name": "Odometer, mileage, HR"},
-    {"id": "PORSCHE_E_TRON_TRON_ODO_MILEAGE_HR", "path": "Trips", "fmt": { "len": 32, "max": 4294967, "div": 1000, "unit": "kilometers" }, "name": "Odometer, mileage, HR", "suggestedMetric": "odometer"}
+    {"id": "PORSCHE_ODO_MILEAGE_HR", "path": "Trips", "fmt": { "len": 32, "max": 4294967, "div": 1000, "unit": "kilometers" }, "name": "Odometer, mileage, HR", "suggestedMetric": "odometer"}
   ]},
 { "hdr": "714", "rax": "77E", "dbg": true, "cmd": {"22": "22E0"}, "freq": 1,
   "signals": [
@@ -765,11 +760,11 @@
     {"id": "PORSCHE_PTC_HTR_FLUID_T1", "path": "Climate.Heater", "fmt": {"bix": 64, "len": 8, "max": 205,   "min": -50,           "add": -50, "unit": "celsius" }, "name": "Heater fluid temperature #1"},
     {"id": "PORSCHE_PTC_HTR_FLUID_T2", "path": "Climate.Heater", "fmt": {"bix": 72, "len": 8, "max": 205,   "min": -50,           "add": -50, "unit": "celsius" }, "name": "Heater fluid temperature #2"}
   ]},
-{ "hdr": "744", "rax": "7AE", "fcm1": true, "dbg": true, "cmd": {"22": "103D"}, "freq": 5,
+{ "hdr": "744", "rax": "7AE", "fcm1": true, "dbg": true, "cmd": {"22": "103D"}, "freq": 1,
   "signals": [
     {"id": "PORSCHE_OBC_HVDC_C", "path": "Battery", "fmt": { "len": 16, "max": 6553.5, "div": 10, "unit": "amps" }, "name": "On-board charger, hv/dc current"}
   ]},
-{ "hdr": "744", "rax": "7AE", "fcm1": true, "dbg": true, "cmd": {"22": "103E"}, "freq": 5,
+{ "hdr": "744", "rax": "7AE", "fcm1": true, "dbg": true, "cmd": {"22": "103E"}, "freq": 1,
   "signals": [
     {"id": "PORSCHE_OBC_CYCLE_ENERGY", "path": "Battery", "fmt": { "len": 16, "max": 655.35, "div": 100, "unit": "kilowattHours" }, "name": "Cycle energy transformation"}
   ]},
@@ -911,10 +906,10 @@
   "signals": [
     {"id": "PORSCHE_HVBAT_KWH_V2", "path": "Battery", "fmt": { "len": 16, "max": 3276.75, "div": 20, "unit": "kilowattHours" }, "name": "HV battery energy", "suggestedMetric": "tractionBatteryCapacity", "description": "Energy stored in the high voltage battery"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "0800"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "0800"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_AC_CMPR_PWR_ACT",       "path": "Climate", "fmt": {"bix": 40, "len": 16, "max": 65535,                   "unit": "watts" }, "name": "A/C compressor power, actual"},
-    {"id": "PORSCHE_AC_COMPRESSOR_PWR_ACT", "path": "Climate", "fmt": {"bix": 40, "len": 16, "max": 65535, "nullmax": 65535, "unit": "watts" }, "name": "A/C compressor power, actual"}
+    {"id": "PORSCHE_AC_COMPRESSOR_PWR_ACT", "path": "Climate", "fmt": {"bix": 40, "len": 16, "max": 65535,                   "unit": "watts" }, "name": "A/C compressor power, actual"},
+    {"id": "PORSCHE_AC_CMPR_PWR_ACT",       "path": "Climate", "fmt": {"bix": 40, "len": 16, "max": 65535, "nullmax": 65535, "unit": "watts" }, "name": "A/C compressor power, actual"}
   ]},
 { "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "2603"}, "freq": 1,
   "signals": [
@@ -984,16 +979,15 @@
     {"id": "PORSCHE_CABIN_T_V2", "path": "Engine", "fmt": { "len": 16, "max": 3276.7, "min": -3276.8, "div": 10,  "sign": true, "unit": "celsius" }, "name": "Cabin temperature"},
     {"id": "PORSCHE_C7_CABIN_T", "path": "Engine", "fmt": { "len": 16, "max": 127.99, "min": -128,    "div": 256, "sign": true, "unit": "celsius" }, "name": "Cabin temperature"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "261E"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "261E"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_RECIRC_ACT_STEPS",      "path": "Climate", "fmt": {           "len": 16, "max": 65535,                                         "unit": "scalar"  }, "name": "Recirculation flap, actual steps"},
-    {"id": "PORSCHE_RECIRC_FLAP_ACT_STEPS", "path": "Climate", "fmt": {           "len": 16, "max": 65535,                       "nullmax": 65535, "unit": "scalar"  }, "name": "Recirculation flap, actual steps"},
-    {"id": "PORSCHE_RECIRC_ACT_PCT",        "path": "Climate", "fmt": {"bix": 16, "len": 8,  "max": 100,               "div": 2,                   "unit": "percent" }, "name": "Recirculation flap, actual"},
-    {"id": "PORSCHE_RECIRC_FLAP_ACT_PCT",   "path": "Climate", "fmt": {"bix": 16, "len": 8,  "max": 127.5, "mul": 0.5,           "nullmax": 127.5, "unit": "percent" }, "name": "Recirculation flap, actual"}
+    {"id": "PORSCHE_MQB_RECIRC_FLAP_ACT",   "path": "Climate", "fmt": {           "len": 16, "max": 65535,                             "unit": "scalar"  }, "name": "Recirculation flap actual position"},
+    {"id": "PORSCHE_RECIRC_FLAP_ACT_STEPS", "path": "Climate", "fmt": {           "len": 16, "max": 65535,           "nullmax": 65535, "unit": "scalar"  }, "name": "Recirculation flap, actual steps"},
+    {"id": "PORSCHE_RECIRC_FLAP_ACT_PCT",   "path": "Climate", "fmt": {"bix": 16, "len": 8,  "max": 100,   "div": 2,                   "unit": "percent" }, "name": "Recirculation flap, actual"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "261F"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "261F"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_RECIRC_CMD_STEPS", "path": "Climate", "fmt": { "len": 16, "max": 65535, "unit": "scalar" }, "name": "Recirculation flap, commanded steps"}
+    {"id": "PORSCHE_MQB_RECIRC_FLAP_TRG", "path": "Climate", "fmt": { "len": 16, "max": 65535, "unit": "scalar" }, "name": "Recirculation flap target position"}
   ]},
 { "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "2620"}, "freq": 5,
   "signals": [
@@ -1009,16 +1003,15 @@
     {"id": "PORSCHE_CLIMATE_FR_L_T_FLP_ACT_VALUE", "path": "Engine",  "fmt": {"bix": 16, "len": 8, "max": 100,   "mul": 0.5,                             "unit": "percent" }, "name": "Front left temperature flap actual value"},
     {"id": "PORSCHE_FRONT_LEFT_T_FLAP_ACT",        "path": "Engine",  "fmt": {"bix": 16, "len": 8, "max": 127.5, "mul": 0.5,           "nullmax": 127.5, "unit": "percent" }, "name": "Front left temperature flap actual"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "2626"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "din": "03", "dbg": true, "cmd": {"22": "2626"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_FR_T_FLAP_ACT",                "path": "Climate", "fmt": {"bix": 16, "len": 8, "max": 100,               "div": 2,                   "unit": "percent" }, "name": "Front right temperature flap actual"},
-    {"id": "PORSCHE_CLIMATE_FR_R_T_FLP_ACT_VALUE", "path": "Engine",  "fmt": {"bix": 16, "len": 8, "max": 100,   "mul": 0.5,                             "unit": "percent" }, "name": "Front right temperature flap actual value"},
-    {"id": "PORSCHE_FRONT_RIGHT_T_FLAP_ACT",       "path": "Engine",  "fmt": {"bix": 16, "len": 8, "max": 127.5, "mul": 0.5,           "nullmax": 127.5, "unit": "percent" }, "name": "Front right temperature flap actual"}
+    {"id": "PORSCHE_CLIMATE_FR_R_T_FLP_ACT_VALUE", "path": "Engine", "fmt": {"bix": 16, "len": 8, "max": 100,               "div": 2,                   "unit": "percent" }, "name": "Front right temperature flap actual value"},
+    {"id": "PORSCHE_FRONT_RIGHT_T_FLAP_ACT",       "path": "Engine", "fmt": {"bix": 16, "len": 8, "max": 127.5, "mul": 0.5,           "nullmax": 127.5, "unit": "percent" }, "name": "Front right temperature flap actual"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "263D"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "din": "03", "dbg": true, "cmd": {"22": "263D"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_REAR_DEFL_T",       "path": "Climate", "fmt": { "len": 8, "max": 84.915, "mul": 0.333,           "unit": "celsius" }, "name": "Temperature, rear deflector"},
-    {"id": "PORSCHE_CLIMATE_RR_DEFL_T", "path": "Engine",  "fmt": { "len": 8, "max": 84.915,               "div": 3, "unit": "celsius" }, "name": "Rear deflector temperature"}
+    {"id": "PORSCHE_CLIMATE_RR_DEFL_T", "path": "Engine", "fmt": { "len": 8, "max": 84.915,               "div": 3, "unit": "celsius" }, "name": "Rear deflector temperature"},
+    {"id": "PORSCHE_PQ35_REAR_DEFL_T",  "path": "Engine", "fmt": { "len": 8, "max": 84.915, "mul": 0.333,           "unit": "celsius" }, "name": "Rear air vent temperature"}
   ]},
 { "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "26ED"}, "freq": 1,
   "signals": [
@@ -1034,24 +1027,23 @@
     {"id": "PORSCHE_WNDSHLD_TEMP",    "path": "Climate", "fmt": {           "len": 8, "max": 108.08, "min": -38.8, "mul": 0.576,           "add": -38.8, "unit": "celsius" }, "name": "Windshield temperature"},
     {"id": "PORSCHE_HVAC_INSIDE_HUM", "path": "Climate", "fmt": {"bix": 32, "len": 8, "max": 100,                                "div": 2,               "unit": "percent" }, "name": "Inside humidity"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "din": "03", "dbg": true, "cmd": {"22": "27D6"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "din": "03", "dbg": true, "cmd": {"22": "27D6"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_AC_COMP_PWR", "path": "Climate", "fmt": {"bix": 16, "len": 8, "max": 10.2, "div": 25, "unit": "kilowatts" }, "name": "Air conditioning compressor power consumption"}
+    {"id": "PORSCHE_PQ35_AC_COMP_PWR", "path": "Climate", "fmt": {"bix": 16, "len": 8, "max": 10.2, "div": 25, "unit": "kilowatts" }, "name": "Air conditioning compressor power consumption"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "42DB"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "42DB"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_CABIN_CO2",            "path": "Climate", "fmt": {"bix": 8, "len": 8, "max": 25500, "mul": 100,                   "unit": "scalar" }, "name": "CO2 content interior"},
-    {"id": "PORSCHE_CO2_CONTENT_INTERIOR", "path": "Climate", "fmt": {"bix": 8, "len": 8, "max": 25400, "mul": 100, "nullmax": 25400, "unit": "scalar" }, "name": "CO2 content interior"}
+    {"id": "PORSCHE_CO2_CONTENT_INTERIOR", "path": "Climate", "fmt": {"bix": 8, "len": 8, "max": 25500, "mul": 100, "unit": "scalar" }, "name": "CO2 content interior"}
   ]},
 { "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "482B"}, "freq": 2,
   "signals": [
     {"id": "PORSCHE_CLIMATE_A_C_CLCH", "path": "Engine", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "A/C clutch"}
   ]},
-{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "4EEF"}, "freq": 5,
+{ "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "4EEF"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_AC_REFRIG_P_SENS1",     "path": "Climate", "fmt": {           "len": 16, "max": 576.708,             "mul": 88, "div": 10000,             "unit": "bars"    }, "name": "A/C refrigerant pressure, sensor 1"},
-    {"id": "PORSCHE_AC_REFRIG_T_SENS1",     "path": "Climate", "fmt": {"bix": 16, "len": 16, "max": 6513.5,  "min": -40, "mul": 10, "div": 100,   "add": -40, "unit": "celsius" }, "name": "A/C refrigerant temperature, sensor 1"},
-    {"id": "PORSCHE_AC_REFRIG_T_SENS1_INT", "path": "Climate", "fmt": {"bix": 32, "len": 16, "max": 6513.5,  "min": -40, "mul": 10, "div": 100,   "add": -40, "unit": "celsius" }, "name": "A/C refrigerant temperature, sensor 1 interior"}
+    {"id": "PORSCHE_AC_REFRIG_P_SENS1",     "path": "Climate", "fmt": {           "len": 16, "max": 576.708,             "mul": 88, "div": 10000,                               "unit": "bars"    }, "name": "A/C refrigerant pressure, sensor 1"},
+    {"id": "PORSCHE_AC_REFRIG_T_SENS1",     "path": "Climate", "fmt": {"bix": 16, "len": 16, "max": 369.4,   "min": -40, "mul": 10, "div": 100,   "add": -40, "nullmax": 369.4, "unit": "celsius" }, "name": "A/C refrigerant temperature, sensor 1"},
+    {"id": "PORSCHE_AC_REFRIG_T_SENS1_INT", "path": "Climate", "fmt": {"bix": 32, "len": 16, "max": 369.4,   "min": -40, "mul": 10, "div": 100,   "add": -40, "nullmax": 369.4, "unit": "celsius" }, "name": "A/C refrigerant temperature, sensor 1 interior"}
   ]},
 { "hdr": "746", "rax": "7B0", "fcm1": true, "dbg": true, "cmd": {"22": "F449"}, "freq": 1,
   "signals": [
@@ -1075,9 +1067,9 @@
   ]},
 { "hdr": "767", "rax": "7D1", "fcm1": true, "dbg": true, "cmd": {"22": "0838"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_ECALL_BAT_CRIT",              "path": "Battery", "fmt": {          "len": 8, "max": 100, "unit": "percent" }, "name": "Emergency call battery critical status"},
+    {"id": "PORSCHE_MQB_ECALL_BAT_CRIT",          "path": "Battery", "fmt": {          "len": 8, "max": 100, "unit": "percent" }, "name": "Emergency call battery critical status"},
     {"id": "PORSCHE_ECALL_BATTERY_CHARGE_STATUS", "path": "Battery", "fmt": {          "len": 8, "max": 100, "unit": "scalar"  }, "name": "Ecall battery charge status"},
-    {"id": "PORSCHE_ECALL_BAT_LVL",               "path": "Battery", "fmt": {"bix": 8, "len": 8, "max": 100, "unit": "percent" }, "name": "Emergency call battery level"},
+    {"id": "PORSCHE_ECALL_SOC",                   "path": "Battery", "fmt": {"bix": 8, "len": 8, "max": 100, "unit": "percent" }, "name": "ECall battery charge level"},
     {"id": "PORSCHE_ECALL_STATUS", "path": "Battery", "name": "ECall battery status", "fmt": {"len": 8, "map": {
           "1": { "description": "CRITICAL", "value": "CRITICAL" },
           "2": { "description": "NORMAL",   "value": "NORMAL" }
@@ -1145,6 +1137,7 @@
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "028D"}, "freq": 1,
   "signals": [
     {"id": "PORSCHE_ECU_TEMP",                      "path": "Engine", "fmt": { "len": 16, "max": 6280.4, "min": -273.1,  "div": 10, "add": -273.1,               "nullmin": -273.1, "unit": "celsius" }, "name": "Control module temperature"},
+    {"id": "PORSCHE_ECM_T_RAW",                     "path": "Engine", "fmt": { "len": 16, "max": 65535,                                                                             "unit": "scalar"  }, "name": "Engine control module temperature, raw 16-bit"},
     {"id": "PORSCHE_ENG_CTRL_MODULE_T",             "path": "Engine", "fmt": { "len": 16, "max": 6280.4, "min": -273.1,  "div": 10, "add": -273.1,                                  "unit": "celsius" }, "name": "Engine control module temperature"},
     {"id": "PORSCHE_ECU_TEMP_KELVIN",               "path": "Engine", "fmt": { "len": 16, "max": 150,    "min": -40,     "div": 10, "add": -273.1, "sign": true,                    "unit": "celsius" }, "name": "Control module temperature"},
     {"id": "PORSCHE_E_TRON_TRON_ENG_CTRL_MODULE_T", "path": "Engine", "fmt": { "len": 16, "max": 3276.7, "min": -3276.8, "div": 10,                "sign": true,                    "unit": "celsius" }, "name": "Control module temperature"}
@@ -1818,7 +1811,8 @@
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "1135"}, "freq": 5,
   "signals": [
     {"id": "PORSCHE_COOLANT_T",       "path": "Engine", "fmt": { "len": 16, "max": 6280.4, "min": -273.1, "div": 10, "add": -273.1, "unit": "celsius" }, "name": "Coolant temperature at radiator outlet"},
-    {"id": "PORSCHE_EARLY_COOLANT_T", "path": "Engine", "fmt": { "len": 16, "max": 300,                   "div": 10,                "unit": "celsius" }, "name": "Coolant temperature at radiator outlet"}
+    {"id": "PORSCHE_EARLY_COOLANT_T", "path": "Engine", "fmt": { "len": 16, "max": 300,                   "div": 10,                "unit": "celsius" }, "name": "Coolant temperature at radiator outlet"},
+    {"id": "PORSCHE_COOLANT_T_RAW",   "path": "Engine", "fmt": { "len": 16, "max": 65535,                                           "unit": "scalar"  }, "name": "Coolant temperature at radiator outlet, raw"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "1136"}, "freq": 1,
   "signals": [
@@ -2117,10 +2111,10 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "11BD"}, "freq": 15,
   "signals": [
-    {"id": "PORSCHE_OIL_LEVEL_WARN",    "path": "Fluids", "fmt": { "len": 16, "max": 26.2,                     "div": 2500,                              "unit": "centimeters" }, "name": "Oil level warning threshold"},
-    {"id": "PORSCHE_EOT_ECM",           "path": "Engine", "fmt": { "len": 16, "max": 200,     "min": -40,      "div": 10,   "add": -273.1,               "unit": "celsius"     }, "name": "Engine oil temperature, engine control module"},
-    {"id": "PORSCHE_PQ35_OIL_LVL_CRIT", "path": "Engine", "fmt": { "len": 16, "max": 131.068, "min": -131.072, "div": 250,                 "sign": true, "unit": "millimeters" }, "name": "Critical engine oil level"},
-    {"id": "PORSCHE_ECM_11BD_RAW",      "path": "Engine", "fmt": { "len": 8,  "max": 255,                                                                "unit": "scalar"      }, "name": "Engine module 11BD, raw"}
+    {"id": "PORSCHE_OIL_LEVEL_WARN",    "path": "Fluids", "fmt": { "len": 16, "max": 26.2,                     "div": 2500,               "unit": "centimeters" }, "name": "Oil level warning threshold"},
+    {"id": "PORSCHE_EOT_ECM",           "path": "Engine", "fmt": { "len": 16, "max": 65535,                                               "unit": "scalar"      }, "name": "Engine control module value 11BD, raw 16-bit"},
+    {"id": "PORSCHE_PQ35_OIL_LVL_CRIT", "path": "Engine", "fmt": { "len": 16, "max": 131.068, "min": -131.072, "div": 250,  "sign": true, "unit": "millimeters" }, "name": "Critical engine oil level"},
+    {"id": "PORSCHE_ECM_11BD_RAW",      "path": "Engine", "fmt": { "len": 8,  "max": 255,                                                 "unit": "scalar"      }, "name": "Engine module 11BD, raw"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "11BE"}, "freq": 1,
   "signals": [
@@ -2169,7 +2163,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "11CD"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_TCO_1_SYS", "path": "Engine", "fmt": { "len": 8, "max": 215, "min": -40, "add": -40, "unit": "celsius" }, "name": "TCO_1_SYS"}
+    {"id": "PORSCHE_TCO_1_SYS",     "path": "Engine", "fmt": { "len": 8,  "max": 215,   "min": -40, "add": -40, "unit": "celsius" }, "name": "TCO_1_SYS"},
+    {"id": "PORSCHE_TCO_1_SYS_RAW", "path": "Engine", "fmt": { "len": 16, "max": 65535,                         "unit": "scalar"  }, "name": "TCO_1_SYS, raw 16-bit"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "11CE"}, "freq": 1,
   "signals": [
@@ -2558,7 +2553,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "pri": "17", "fcm1": true, "dbg": true, "cmd": {"22": "13A0"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_COOLANT_T_MODELED_VALUE", "path": "Engine", "fmt": { "len": 16, "max": 3003.6, "min": -3549.9, "div": 10, "add": -273.1, "sign": true, "unit": "celsius" }, "name": "Coolant temperature modeled value"}
+    {"id": "PORSCHE_COOLANT_T_MODELED_VALUE",     "path": "Engine", "fmt": { "len": 16, "max": 3003.6, "min": -3549.9, "div": 10, "add": -273.1, "sign": true, "unit": "celsius" }, "name": "Coolant temperature modeled value"},
+    {"id": "PORSCHE_COOLANT_T_MODELED_VALUE_RAW", "path": "Engine", "fmt": { "len": 8,  "max": 255,                                                            "unit": "scalar"  }, "name": "Coolant temperature modeled value, one byte, raw"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "13A1"}, "freq": 1,
   "signals": [
@@ -2630,8 +2626,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "fcm1": true, "dbg": true, "cmd": {"22": "13F2"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_KNOCK_RETARD_CYL_1", "path": "Engine", "fmt": { "len": 8, "max": 47.62,  "min": -48, "mul": 3, "div": 8, "add": -48, "unit": "degrees" }, "name": "Knock retard:, cylinder 1"},
-    {"id": "PORSCHE_IGA_CYL_KNK_0",      "path": "Engine", "fmt": { "len": 8, "max": 47.625, "min": -48, "mul": 3, "div": 8, "add": -48, "unit": "degrees" }, "name": "IGA_CYL_KNK, 0"}
+    {"id": "PORSCHE_KNOCK_RETARD_CYL_1", "path": "Engine", "fmt": { "len": 8,  "max": 47.62,      "min": -48, "mul": 3, "div": 8, "add": -48, "unit": "degrees" }, "name": "Knock retard:, cylinder 1"},
+    {"id": "PORSCHE_IGA_CYL_KNK_0",      "path": "Engine", "fmt": { "len": 32, "max": 4294967295,                                             "unit": "scalar"  }, "name": "Engine control module value 13F2, raw 32-bit"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "fcm1": true, "dbg": true, "cmd": {"22": "13F3"}, "freq": 1,
   "signals": [
@@ -3080,8 +3076,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "1626"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_RADIATOR_OUTPUT_ECT_ACT",               "path": "Engine", "fmt": { "len": 16, "max": 6280,   "min": -273,   "div": 10, "add": -273.1, "unit": "celsius" }, "name": "Radiator output coolant temperature, actual"},
-    {"id": "PORSCHE_PQ35_RADIATOR_OUTPUT_COOLANT_T_ACTUAL", "path": "Engine", "fmt": { "len": 16, "max": 6280.4, "min": -273.1, "div": 10, "add": -273.1, "unit": "celsius" }, "name": "Radiator output coolant temp: actual"}
+    {"id": "PORSCHE_RADIATOR_OUTPUT_ECT_ACT",               "path": "Engine", "fmt": { "len": 16, "max": 6280,  "min": -273, "div": 10, "add": -273.1, "unit": "celsius" }, "name": "Radiator output coolant temperature, actual"},
+    {"id": "PORSCHE_PQ35_RADIATOR_OUTPUT_COOLANT_T_ACTUAL", "path": "Engine", "fmt": { "len": 16, "max": 65535,                                        "unit": "scalar"  }, "name": "Radiator output coolant temp: actual, raw 16-bit"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "din": "03", "dbg": true, "cmd": {"22": "1628"}, "freq": 5,
   "signals": [
@@ -3093,7 +3089,7 @@
   "signals": [
     {"id": "PORSCHE_FUEL_T_7E0",  "path": "Engine", "fmt": { "len": 16, "max": 300,        "min": -40,    "div": 10, "add": -273.1, "nullmin": -40, "nullmax": 300, "unit": "celsius" }, "name": "Fuel temperature"},
     {"id": "PORSCHE_PQ35_FUEL_T", "path": "Engine", "fmt": { "len": 16, "max": 6280.4,     "min": -273.1, "div": 10, "add": -273.1,                                 "unit": "celsius" }, "name": "Fuel temperature"},
-    {"id": "PORSCHE_162D_RAW",    "path": "Engine", "fmt": { "len": 32, "max": 4294967295,                                                                          "unit": "scalar"  }, "name": "Engine read 162D, raw count"}
+    {"id": "PORSCHE_FUEL_T_RAW",  "path": "Engine", "fmt": { "len": 32, "max": 4294967295,                                                                          "unit": "scalar"  }, "name": "Engine control module value 162D, raw 32-bit"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "1631"}, "freq": 1,
   "signals": [
@@ -3318,7 +3314,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "1798"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_CHARGE_AIR_T_TUBROCHARGER_OUTLET_CALCULATED", "path": "Battery", "fmt": { "len": 16, "max": 3003.6, "min": -273.1, "mul": 1000, "div": 10000, "add": -273.1, "sign": true, "nullmin": -273.1, "unit": "celsius" }, "name": "Charge air temp at the turbocharger outlet, calculated"}
+    {"id": "PORSCHE_CHARGE_AIR_T_TUBROCHARGER_OUTLET_CALCULATED",         "path": "Battery", "fmt": { "len": 16, "max": 3003.6, "min": -273.1, "mul": 1000, "div": 10000, "add": -273.1, "sign": true, "nullmin": -273.1, "unit": "celsius" }, "name": "Charge air temp at the turbocharger outlet, calculated"},
+    {"id": "PORSCHE_MQB_CHARGE_AIR_T_TUBROCHARGER_OUTLET_CALCULATED_RAW", "path": "Battery", "fmt": { "len": 16, "max": 65535,                                                                                            "unit": "scalar"  }, "name": "Charge air temp at the turbocharger outlet, calculated, raw"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "179C"}, "freq": 5,
   "signals": [
@@ -3791,7 +3788,7 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "20A1"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_PQ35_CALCULATED_OIL_T", "path": "Engine", "fmt": { "len": 8, "max": 215, "min": -40, "add": -40, "unit": "celsius" }, "name": "Calculated oil temperature", "suggestedMetric": "engineOilTemperature"}
+    {"id": "PORSCHE_PQ35_CALCULATED_OIL_T", "path": "Engine", "fmt": { "len": 16, "max": 3276.7, "min": -3276.8, "div": 10, "sign": true, "unit": "celsius" }, "name": "Calculated oil temperature", "suggestedMetric": "engineOilTemperature"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "20A2"}, "freq": 1,
   "signals": [
@@ -4536,7 +4533,8 @@
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "4381"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_LONG_TERM_FUEL_TRIM_IDLE_V2", "path": "Fuel", "fmt": { "len": 16, "max": 327, "min": -327, "div": 100, "sign": true, "unit": "unknown" }, "name": "Long term fuel trim at idle"}
+    {"id": "PORSCHE_LONG_TERM_FUEL_TRIM_IDLE_V2",     "path": "Fuel", "fmt": { "len": 16, "max": 327,    "min": -327,    "div": 100, "sign": true,                                        "unit": "unknown" }, "name": "Long term fuel trim at idle"},
+    {"id": "PORSCHE_LONG_TERM_FUEL_TRIM_IDLE_7E0_V2", "path": "Fuel", "fmt": { "len": 16, "max": 327.67, "min": -327.68, "div": 100, "sign": true, "nullmin": -327.68, "nullmax": 327.67, "unit": "unknown" }, "name": "Long term fuel trim at idle"}
   ]},
 { "hdr": "7E0", "rax": "7E8", "dbg": true, "cmd": {"22": "4384"}, "freq": 3600,
   "signals": [
@@ -5604,8 +5602,8 @@
   ]},
 { "hdr": "7E1", "rax": "7E9", "dbg": true, "cmd": {"22": "1196"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HYBRID_T",     "path": "Engine", "fmt": { "len": 16, "max": 65535,      "unit": "celsius" }, "name": "Hybrid temperature"},
-    {"id": "PORSCHE_TCM_1196_RAW", "path": "Engine", "fmt": { "len": 32, "max": 4294967295, "unit": "scalar"  }, "name": "Transmission read 1196, raw count"}
+    {"id": "PORSCHE_HYBRID_T",         "path": "Engine", "fmt": { "len": 16, "max": 65535,      "unit": "celsius" }, "name": "Hybrid temperature"},
+    {"id": "PORSCHE_MQB_TCM_HYBRID_T", "path": "Engine", "fmt": { "len": 32, "max": 4294967295, "unit": "scalar"  }, "name": "Transmission control module value 1196, raw 32-bit"}
   ]},
 { "hdr": "7E1", "rax": "7E9", "dbg": true, "cmd": {"22": "11A7"}, "freq": 3600,
   "signals": [
@@ -5821,11 +5819,13 @@
   ]},
 { "hdr": "7E1", "rax": "7E9", "dbg": true, "cmd": {"22": "2B1B"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_TIRE_FL_SPD_2", "path": "Movement", "fmt": { "len": 16, "max": 1000, "div": 10, "unit": "kilometersPerHour" }, "name": "Front left wheel speed"}
+    {"id": "PORSCHE_TIRE_FL_SPD_2",  "path": "Movement", "fmt": { "len": 16, "max": 1000,  "div": 10,                   "unit": "kilometersPerHour" }, "name": "Front left wheel speed"},
+    {"id": "PORSCHE_TIRE_FL_SPD_V2", "path": "Movement", "fmt": { "len": 16, "max": 409.4, "div": 10, "nullmax": 409.4, "unit": "kilometersPerHour" }, "name": "Front left wheel speed"}
   ]},
 { "hdr": "7E1", "rax": "7E9", "dbg": true, "cmd": {"22": "2B1C"}, "freq": 0.25,
   "signals": [
-    {"id": "PORSCHE_TIRE_FR_SPD_2", "path": "Movement", "fmt": { "len": 16, "max": 1000, "div": 10, "unit": "kilometersPerHour" }, "name": "Front right wheel speed"}
+    {"id": "PORSCHE_TIRE_FR_SPD_2",  "path": "Movement", "fmt": { "len": 16, "max": 1000,  "div": 10,                   "unit": "kilometersPerHour" }, "name": "Front right wheel speed"},
+    {"id": "PORSCHE_TIRE_FR_SPD_V2", "path": "Movement", "fmt": { "len": 16, "max": 409.4, "div": 10, "nullmax": 409.4, "unit": "kilometersPerHour" }, "name": "Front right wheel speed"}
   ]},
 { "hdr": "7E1", "rax": "7E9", "dbg": true, "cmd": {"22": "2B1D"}, "freq": 0.25,
   "signals": [
@@ -6297,7 +6297,7 @@
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "180A"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_HVBAT_V_180A", "path": "Battery", "fmt": { "len": 16, "max": 6553, "div": 10, "unit": "volts" }, "name": "HV battery voltage, measurement 2", "description": "Reads within 1 V of the pack voltage on 1801; which point of the pack it measures is not known."}
+    {"id": "PORSCHE_HVBAT_V_180A", "path": "Battery", "fmt": { "len": 16, "max": 6553.5, "div": 10, "nullmax": 6553.4, "unit": "volts" }, "name": "HV battery voltage, measurement 2", "description": "Reads within 1 V of the pack voltage on 1801; which point of the pack it measures is not known."}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "180B"}, "freq": 1,
   "signals": [
@@ -7143,16 +7143,16 @@
     {"id": "PORSCHE_BMS_CELL_SOC_MIN",     "path": "Battery", "fmt": {          "len": 8, "max": 100, "unit": "percent" }, "name": "Cell state of charge min, value"},
     {"id": "PORSCHE_BMS_CELL_SOC_MIN_IDX", "path": "Battery", "fmt": {"bix": 8, "len": 8, "max": 255, "unit": "scalar"  }, "name": "Cell state of charge min, index"}
   ]},
-{ "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1E32"}, "freq": 5,
+{ "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1E32"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_HVBAT_TOT_AH_CHRG",   "path": "Battery", "fmt": {           "len": 32, "max": 7818700,                        "div": 549.31642,                "unit": "ampereHours"   }, "name": "HV battery total ampere hours of charge"},
     {"id": "PORSCHE_HVBAT_TOT_CHG_AH",    "path": "Battery", "fmt": {           "len": 32, "max": 7818749,                        "div": 549.31642,                "unit": "ampereHours"   }, "name": "High voltage battery total charge ah"},
-    {"id": "PORSCHE_HVBAT_TOT_AH_DCHRG",  "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 3909350,    "min": -3909350,    "div": 549.31642,  "sign": true, "unit": "ampereHours"   }, "name": "HV battery total ampere hours of discharge"},
+    {"id": "PORSCHE_HVBAT_TOT_AH_CHRG",   "path": "Battery", "fmt": {           "len": 32, "max": 7818700,                        "div": 549.31642,                "unit": "ampereHours"   }, "name": "HV battery total ampere hours of charge"},
     {"id": "PORSCHE_HVBAT_TOT_DCHG_AH",   "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 7818749,                        "div": 549.31642,                "unit": "ampereHours"   }, "name": "High voltage battery total discharge ah"},
-    {"id": "PORSCHE_HVBAT_TOT_KWH_CHRG",  "path": "Battery", "fmt": {"bix": 64, "len": 32, "max": 500300,                         "div": 8583.07212,               "unit": "kilowattHours" }, "name": "HV battery total kilowatt hours of charge"},
+    {"id": "PORSCHE_HVBAT_TOT_AH_DCHRG",  "path": "Battery", "fmt": {"bix": 32, "len": 32, "max": 3909350,    "min": -3909350,    "div": 549.31642,  "sign": true, "unit": "ampereHours"   }, "name": "HV battery total ampere hours of discharge"},
     {"id": "PORSCHE_HVBAT_TOT_CHG_KWH",   "path": "Battery", "fmt": {"bix": 64, "len": 32, "max": 500399,                         "div": 8583.07212,               "unit": "kilowattHours" }, "name": "High voltage battery total charge kwh"},
-    {"id": "PORSCHE_HVBAT_TOT_KWH_DCHRG", "path": "Battery", "fmt": {"bix": 96, "len": 32, "max": 250199,     "min": -250199,     "div": 8583.07212, "sign": true, "unit": "kilowattHours" }, "name": "HV battery total kilowatt hours of discharge"},
+    {"id": "PORSCHE_HVBAT_TOT_KWH_CHRG",  "path": "Battery", "fmt": {"bix": 64, "len": 32, "max": 500300,                         "div": 8583.07212,               "unit": "kilowattHours" }, "name": "HV battery total kilowatt hours of charge"},
     {"id": "PORSCHE_HVBAT_TOT_DCHG_KWH",  "path": "Battery", "fmt": {"bix": 96, "len": 32, "max": 500399,                         "div": 8583.07212,               "unit": "kilowattHours" }, "name": "High voltage battery total discharge kwh"},
+    {"id": "PORSCHE_HVBAT_TOT_KWH_DCHRG", "path": "Battery", "fmt": {"bix": 96, "len": 32, "max": 250199,     "min": -250199,     "div": 8583.07212, "sign": true, "unit": "kilowattHours" }, "name": "HV battery total kilowatt hours of discharge"},
     {"id": "PORSCHE_HVBAT_KWH_DISCHG",    "path": "Battery", "fmt": {"bix": 96, "len": 32, "max": 250199.883, "min": -250199.883, "div": 8583.07212, "sign": true, "unit": "kilowattHours" }, "name": "HV battery energy discharged"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "din": "03", "dbg": true, "cmd": {"22": "1E33"}, "freq": 1,
@@ -7195,9 +7195,9 @@
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1E3D"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_CURRENT",        "path": "Battery", "fmt": { "len": 16, "max": 200,        "min": -200, "div": 4, "add": -511, "unit": "amps"   }, "name": "HV battery current"},
     {"id": "PORSCHE_HVBAT_I",              "path": "Battery", "fmt": { "len": 32, "max": 4294967295,                                     "unit": "scalar" }, "name": "High-voltage battery current, raw count"},
     {"id": "PORSCHE_HVBAT_I_RAW",          "path": "Battery", "fmt": { "len": 24, "max": 16777215,                                       "unit": "scalar" }, "name": "HV battery current, raw"},
+    {"id": "PORSCHE_HVBAT_CURRENT",        "path": "Battery", "fmt": { "len": 16, "max": 200,        "min": -200, "div": 4, "add": -511, "unit": "amps"   }, "name": "HV battery current"},
     {"id": "PORSCHE_E_TRON_HVBAT_CURRENT", "path": "Battery", "fmt": { "len": 16, "max": 200,        "min": -200, "div": 4, "add": -511, "unit": "amps"   }, "name": "HV battery current",                      "suggestedMetric": "tractionBatteryCurrent"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1E40"}, "freq": 30,
@@ -7610,68 +7610,68 @@
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EAE"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_1", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 1"},
-    {"id": "PORSCHE_T_SENS_1",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 1"}
+    {"id": "PORSCHE_T_SENS_1",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 1"},
+    {"id": "PORSCHE_HVBAT_T_1", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 1"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EAF"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_2", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 2"},
-    {"id": "PORSCHE_T_SENS_2",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 2"}
+    {"id": "PORSCHE_T_SENS_2",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 2"},
+    {"id": "PORSCHE_HVBAT_T_2", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 2"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB0"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_3", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 3"},
-    {"id": "PORSCHE_T_SENS_3",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 3"}
+    {"id": "PORSCHE_T_SENS_3",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 3"},
+    {"id": "PORSCHE_HVBAT_T_3", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 3"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB1"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_4", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 4"},
-    {"id": "PORSCHE_T_SENS_4",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 4"}
+    {"id": "PORSCHE_T_SENS_4",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 4"},
+    {"id": "PORSCHE_HVBAT_T_4", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 4"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB2"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_5", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 5"},
-    {"id": "PORSCHE_T_SENS_5",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 5"}
+    {"id": "PORSCHE_T_SENS_5",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 5"},
+    {"id": "PORSCHE_HVBAT_T_5", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 5"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB3"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_6", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 6"},
-    {"id": "PORSCHE_T_SENS_6",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 6"}
+    {"id": "PORSCHE_T_SENS_6",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 6"},
+    {"id": "PORSCHE_HVBAT_T_6", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 6"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB4"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_7", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 7"},
-    {"id": "PORSCHE_T_SENS_7",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 7"}
+    {"id": "PORSCHE_T_SENS_7",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 7"},
+    {"id": "PORSCHE_HVBAT_T_7", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 7"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB5"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_8", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 8"},
-    {"id": "PORSCHE_T_SENS_8",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 8"}
+    {"id": "PORSCHE_T_SENS_8",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 8"},
+    {"id": "PORSCHE_HVBAT_T_8", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 8"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB6"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_9", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 9"},
-    {"id": "PORSCHE_T_SENS_9",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 9"}
+    {"id": "PORSCHE_T_SENS_9",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 9"},
+    {"id": "PORSCHE_HVBAT_T_9", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 9"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB7"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_10", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 10"},
-    {"id": "PORSCHE_T_SENS_10",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 10"}
+    {"id": "PORSCHE_T_SENS_10",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 10"},
+    {"id": "PORSCHE_HVBAT_T_10", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 10"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB8"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_11", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 11"},
-    {"id": "PORSCHE_T_SENS_11",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 11"}
+    {"id": "PORSCHE_T_SENS_11",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 11"},
+    {"id": "PORSCHE_HVBAT_T_11", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 11"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EB9"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_12", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 12"},
-    {"id": "PORSCHE_T_SENS_12",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 12"}
+    {"id": "PORSCHE_T_SENS_12",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 12"},
+    {"id": "PORSCHE_HVBAT_T_12", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 12"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EBA"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_13", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 13"},
-    {"id": "PORSCHE_T_SENS_13",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 13"}
+    {"id": "PORSCHE_T_SENS_13",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 13"},
+    {"id": "PORSCHE_HVBAT_T_13", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 13"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EBB"}, "freq": 5,
   "signals": [
@@ -7679,17 +7679,17 @@
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EBC"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_15", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 15"},
-    {"id": "PORSCHE_T_SENS_15",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 15"}
+    {"id": "PORSCHE_T_SENS_15",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 15"},
+    {"id": "PORSCHE_HVBAT_T_15", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 15"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "1EBD"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_16", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 16"},
-    {"id": "PORSCHE_T_SENS_16",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 16"}
+    {"id": "PORSCHE_T_SENS_16",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 16"},
+    {"id": "PORSCHE_HVBAT_T_16", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 16"}
   ]},
-{ "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "2A0B"}, "freq": 5,
+{ "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "2A0B"}, "freq": 1,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T", "path": "Battery", "fmt": { "len": 16, "max": 1023.984, "div": 64, "unit": "celsius" }, "name": "HV battery temperature"}
+    {"id": "PORSCHE_HVBAT_T", "path": "Battery", "fmt": { "len": 8, "max": 155, "min": -100, "add": -100, "unit": "celsius" }, "name": "High voltage battery temperature"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "din": "03", "dbg": true, "cmd": {"22": "5170"}, "freq": 1,
   "signals": [
@@ -7723,8 +7723,8 @@
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "7425"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_HVBAT_T_17", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 17"},
-    {"id": "PORSCHE_T_SENS_17",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 17"}
+    {"id": "PORSCHE_T_SENS_17",  "path": "Engine",  "fmt": { "len": 16, "max": 511,      "min": -512, "div": 64, "sign": true, "unit": "celsius" }, "name": "Temperature sensor 17"},
+    {"id": "PORSCHE_HVBAT_T_17", "path": "Battery", "fmt": { "len": 16, "max": 1023.984,              "div": 64,               "unit": "celsius" }, "name": "HV battery temperature sensor 17"}
   ]},
 { "hdr": "7E5", "rax": "7ED", "dbg": true, "cmd": {"22": "7448"}, "freq": 1,
   "signals": [
@@ -8260,7 +8260,7 @@
   ]},
 { "hdr": "FC00", "rax": "FE007B", "pri": "17", "tst": "7C", "dbg": true, "cmd": {"22": "086D"}, "freq": 5,
   "signals": [
-    {"id": "PORSCHE_ODO_V4", "path": "Trips", "fmt": { "len": 32, "max": 4294967295, "unit": "kilometers" }, "name": "Odometer, electric drive", "suggestedMetric": "odometer"}
+    {"id": "PORSCHE_ODO_V3", "path": "Trips", "fmt": { "len": 32, "max": 4294967295, "unit": "kilometers" }, "name": "Odometer, electric drive", "suggestedMetric": "odometer"}
   ]},
 { "hdr": "FC00", "rax": "FE007B", "pri": "17", "tst": "7C", "dbg": true, "cmd": {"22": "1007"}, "freq": 1,
   "signals": [
